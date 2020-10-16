@@ -24,7 +24,7 @@ Vagrant.configure("2") do |config|
     sudo locale-gen en_GB.UTF-8
     sudo update-locale 
     # Install pip
-    sudo apt install -y python3-pip
+    sudo apt install -y python3-pip python3-dev libpq-dev postgresql
     # Upgrade pip to the latest version.
     sudo pip install --upgrade pip
     # Install and configure python virtualenvwrapper.
