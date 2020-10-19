@@ -26,9 +26,9 @@ Vagrant.configure("2") do |config|
     # Install pip
     sudo apt install -y python3-pip python3-dev libpq-dev postgresql
     # Upgrade pip to the latest version.
-    sudo pip install --upgrade pip
+    sudo pip3 install --upgrade pip
     # Install and configure python virtualenvwrapper.
-    sudo pip install virtualenvwrapper
+    sudo pip3  install virtualenvwrapper
     #set vurtualenv
     mkvirtualenv project0001api --python=python3
     if ! grep -q VIRTUALENV_ALREADY_ADDED /home/vagrant/.bashrc; then
