@@ -1,13 +1,13 @@
-from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.models import BaseUserManager
+from django.db import models
 
-class ProfileManager(BaseUserManager):
-    """Class to work with Profile Model"""
+class UserManager(BaseUserManager):
+    """Class to work with User Model"""
 
     def create_user(self, email, username, password):
-        """Create new user Profile"""
+        """Create new user"""
 
         #check if email is empty
         if not email:
@@ -24,7 +24,7 @@ class ProfileManager(BaseUserManager):
         return user
 
     def create_superuser(self, email, username, password):
-        """Create new su Profile"""
+        """Create new su"""
 
         #create new user profile
         user=self.create_user(email, username, password)
@@ -37,7 +37,7 @@ class ProfileManager(BaseUserManager):
         return user
 
         
-class Profile(AbstractBaseUser, PermissionsMixin):
+class User(AbstractBaseUser, PermissionsMixin):
     """ Represents users profile in system """
     """ Model's fields"""
     email=models.EmailField(max_length=255, unique=True)
@@ -46,7 +46,7 @@ class Profile(AbstractBaseUser, PermissionsMixin):
     is_active=models.BooleanField(default=True)
     is_staff=models.BooleanField(default=False)
 
-    object=ProfileManager()
+    object=UserManager()
 
     #Authorized with email
     USERNAME_FIELD='email'

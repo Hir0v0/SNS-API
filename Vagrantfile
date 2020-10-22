@@ -24,19 +24,23 @@ Vagrant.configure("2") do |config|
     sudo locale-gen en_GB.UTF-8
     sudo update-locale 
     # Install pip
-    sudo apt install -y python3-pip python3-dev libpq-dev postgresql
+    #sudo apt install postgresql
     # Upgrade pip to the latest version.
-    sudo pip3 install --upgrade pip
+    #sudo pip install --upgrade pip
     # Install and configure python virtualenvwrapper.
-    sudo pip3  install virtualenvwrapper
-    #set vurtualenv
-    mkvirtualenv project0001api --python=python3
-    if ! grep -q VIRTUALENV_ALREADY_ADDED /home/vagrant/.bashrc; then
-        echo "# VIRTUALENV_ALREADY_ADDED" >> /home/vagrant/.bashrc
-        echo "WORKON_HOME=~/.virtualenvs" >> /home/vagrant/.bashrc
-        echo "PROJECT_HOME=/vagrant" >> /home/vagrant/.bashrc
-        echo "source /usr/local/bin/virtualenvwrapper.sh" >> /home/vagrant/.bashrc
-    fi
+    ##!!!!!Run on vertual machine
+    # cd /vagrant/project0001api/
+    # mkvirtualenv venv
+    # python3 -m pip install --upgrade pip
+    # pip install -r ../project_requirements.txt
+    #
+    #
+    # if ! grep -q VIRTUALENV_ALREADY_ADDED /home/vagrant/.bashrc; then
+    #     echo "# VIRTUALENV_ALREADY_ADDED" >> /home/vagrant/.bashrc
+    #     echo "WORKON_HOME=~/.virtualenvs" >> /home/vagrant/.bashrc
+    #     echo "PROJECT_HOME=/vagrant" >> /home/vagrant/.bashrc
+    #     echo "source /usr/local/bin/virtualenvwrapper.sh" >> /home/vagrant/.bashrc
+    # fi
   SHELL
 
 end
