@@ -2,6 +2,7 @@ from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.models import BaseUserManager
 from django.db import models
+from rest_framework import validators
 
 class UserManager(BaseUserManager):
     """Class to work with User Model"""
@@ -40,8 +41,14 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser, PermissionsMixin):
     """ Represents users profile in system """
     """ Model's fields"""
-    email=models.EmailField(max_length=255, unique=True)
-    username=models.CharField(max_length=255)
+    email=models.EmailField(
+        unique=True,
+        blank=False
+        )
+    username=models.CharField(
+        db_index=True, 
+        max_length=255,
+        unique=True)
     """Fields nessesary for inheritance"""
     is_active=models.BooleanField(default=True)
     is_staff=models.BooleanField(default=False)
