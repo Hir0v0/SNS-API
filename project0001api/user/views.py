@@ -1,31 +1,39 @@
-from rest_framework import status,viewsets,filters
-from .models import User 
-from . import serializers,permissions
-from rest_framework.authentication import TokenAuthentication
-from rest_framework.authtoken.serializers import AuthTokenSerializer
-from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework import permissions, status,generics
 from rest_framework.response import Response
-from rest_framework.authtoken.models import Token
+from rest_framework.decorators import api_view, permission_classes
+from . import serializers,models
+from .permissions import UserEditPermission
+from rest_framework.permissions import AllowAny
 
-class UserViewSet(viewsets.ModelViewSet):
-    """Handling basic model functions"""
-    serializer_class=serializers.UserSerializer
-    queryset=User.object.all()
-    authentication_classes=[TokenAuthentication,]
-    permission_classes=(permissions.UserEditPermission,)
-    filter_backends = (filters.SearchFilter, )
-    search_fields=('username',)
 
-class LoginViewSet(viewsets.ViewSet):
-    """Handling user authentication"""
-    serializer_class=AuthTokenSerializer
-    def create(self, request):
-        """Use ObtainAuthToken to validate and create token"""
-        #check credentials
-        serializer = self.serializer_class(data=request.data)
-        #if matched return restframework token
-        if serializer.is_valid():
-            token, created =  Token.objects.get_or_create(user=serializer.validated_data['user'])
-            return Response({'token': token.key})
-        #if not matched, return error
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+class UserCreate(generics.CreateAPIView):
+    """ Register user"""
+    serializer_class = serializers.UserSerializer
+    permission_classes = (AllowAny,)
+
+class UserProfile(generics.RetrieveUpdateDestroyAPIView):
+    """
+    API endpoint that represents a single user.
+    """
+    queryset = models.User.objects.all()
+    serializer_class = serializers.UserSerializer
+    permission_classes=(permissions.IsAuthenticated, UserEditPermission)
+    
+
+@api_view(['POST'])
+@permission_classes((AllowAny, ))
+def login_view(request):
+    """View for login, return Bearer Token"""
+    serializer=serializers.UserLoginSerializer(data=request.data)
+    #initilize object to be returned to view
+    data={}
+    #check posted data
+    if serializer.is_valid():
+        user=serializer.validate(request.data)
+        data['responce']="Successfully logged in user"
+        data['email']=user.email
+        
+    else:
+        data=serializer.errors
+    return Response(data)
+
