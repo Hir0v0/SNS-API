@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'user',
+    'profile',
     'message',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
@@ -129,3 +131,32 @@ STATIC_URL = '/static/'
 
 #Set models in use
 AUTH_USER_MODEL='user.User'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+    ),
+}
+import datetime
+JWT_AUTH = {
+ 
+    'JWT_VERIFY': True,
+    'JWT_VERIFY_EXPIRATION': True,
+    #token expiration time
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=3000),
+    'JWT_AUTH_HEADER_PREFIX': 'Bearer',
+ 
+}
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        "Bearer": {
+                       "type": "apiKey",
+                       "description": "Copy 'Bearer ' + valid JWT token (retrieved by using \"/api/Auth/login\" entrypoint) into the field",
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+    },
+}

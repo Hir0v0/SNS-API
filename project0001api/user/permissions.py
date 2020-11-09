@@ -8,3 +8,8 @@ class UserEditPermission(permissions.BasePermission):
             return True
 
         return obj.id==request.user.id
+
+class UserAccesPermission(permissions.BasePermission):
+    """Set permissions to users for actions with ther profiles"""
+    def has_object_permission(self, request, view, obj):
+        return obj.id==request.user.id
