@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'user',
     'profile',
     'message',
-    'drf_yasg',
+    'drf_yasg2',
 ]
 
 MIDDLEWARE = [
