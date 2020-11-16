@@ -5,7 +5,6 @@ from . import serializers,models
 from .permissions import UserEditPermission
 from rest_framework.permissions import AllowAny
 
-
 class UserCreate(generics.CreateAPIView):
     """ Register user"""
     serializer_class = serializers.UserSerializer

@@ -7,7 +7,7 @@ class UserSerializer(serializers.ModelSerializer):
     """Serializer for users"""
     class Meta:
         model=models.User
-        fields=('email','password','username')
+        exclude=('is_active','is_staff','is_admin', 'password', 'last_login', 'first_login')
         extra_kwargs={
             'password':{'write_only':True}
             }
