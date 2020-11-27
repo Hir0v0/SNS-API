@@ -42,6 +42,10 @@ INSTALLED_APPS = [
     'user',
     'profile',
     'message',
+    'badge',
+    'post',
+    'comment',
+    'mptt',
     'drf_yasg2',
 ]
 
@@ -128,6 +132,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = '/vol/web/static/'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT='/vol/web/media/'
 
 #Set models in use
 AUTH_USER_MODEL='user.User'

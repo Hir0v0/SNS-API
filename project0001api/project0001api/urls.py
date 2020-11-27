@@ -19,6 +19,8 @@ from django.urls import include
 from drf_yasg2.views import get_schema_view
 from drf_yasg2 import openapi
 from rest_framework import permissions
+from . import settings
+from django.conf.urls.static import static
 
 schema_view = get_schema_view(
    openapi.Info(
@@ -35,7 +37,15 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/', include('user.urls')),
-    path('api/v1/', include('message.urls')),
+    path('api/v1/user/', include('user.urls')),
+    path('api/v1/message/', include('message.urls')),
+    path('api/v1/profile/', include('profile.urls')),
+    path('api/v1/badge/', include('badge.urls')),
+    path('api/v1/post/', include('post.urls')),
+    path('api/v1/comment/', include('comment.urls')),
     path('api/v1/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
 ]
+
+if settings.DEBUG:
+    """Debug server media"""
+    urlpatterns+=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
