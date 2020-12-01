@@ -2,12 +2,7 @@ from rest_framework import permissions
 
 
 class IsAuthor(permissions.BasePermission):
-    """Set permissions for post author"""
-    def has_object_permission(self, request, view, obj):
-        return obj.user == request.user
-
-class IsCommentAuthor(permissions.BasePermission):
-    """Set permissions for comment author"""
+    """Set permissions for post or comment author"""
     def has_object_permission(self, request, view, obj):
         return obj.user == request.user
 

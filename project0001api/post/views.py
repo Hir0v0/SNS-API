@@ -1,22 +1,23 @@
-from django.shortcuts import render
+
 from rest_framework import permissions, generics
-from .serializers import ListPostSerializer, PostSerializer,CreateCommentSerializer
+from .serializers import ListPostSerializer, PostSerializer
+from comment.serializers import CreateCommentSerializer
 from project0001api.src.permissions import IsAuthor
 from project0001api.src.views import CreateRetrieveUpdateDestroy,CreateUpdateDestroy
-from .models import Post, Comment
+from .models import Post
 
 # Create your views here.
 class PostListView(generics.ListAPIView):
-    """ Post feed """
+    """ user's wall """
     serializer_class = ListPostSerializer
 
     def get_queryset(self):
         return Post.objects.filter(
-            user_id=self.kwargs.get('pk')).select_related('author').prefetch_related('comments')
+            user_id=self.kwargs.get('pk')).select_related('user').prefetch_related('comments')
 
 
 class PostView(CreateRetrieveUpdateDestroy):
-    """ CRUD поста
+    """ CRUD for post
     """
     permission_classes = [permissions.IsAuthenticatedOrReadOnly,]
     queryset = Post.objects.all().select_related('user').prefetch_related('comments')
@@ -28,19 +29,3 @@ class PostView(CreateRetrieveUpdateDestroy):
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
-
-class CommentsView(CreateUpdateDestroy):
-    """ CRUD комментариев к запси
-    """
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-    queryset = Comment.objects.all()
-    serializer_class = CreateCommentSerializer
-    permission_classes_by_action = {'update': [IsAuthor],
-                                    'destroy': [IsAuthor]}
-
-    def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
-
-    def perform_destroy(self, instance):
-        instance.is_deleted = True
-        instance.save()
