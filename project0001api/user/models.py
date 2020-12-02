@@ -43,12 +43,23 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser):
     """ Represents users profile in system """
     """ Model's fields"""
+    GENDER=(
+        ('male','male'),
+        ('female', 'female')
+    )
     email 					= models.EmailField(verbose_name="email", max_length=60, unique=True)#!Required
     username                = models.CharField(max_length=30, unique=True)#!Required
-    #avatar                  = models.ImageField(upload_to="user/avatar/", blank=True, null=True)
+    avatar                  = models.ImageField(upload_to="user/avatar/", blank=True, null=True)
+    bio                     = models.TextField(blank=True, null=True)
+    birthday                = models.DateField(blank=True, null=True)
+    first_login             = models.DateTimeField(blank=True,null=True)
+    last_login              = models.DateTimeField(blank=True,null=True)
+    gender                  = models.CharField(max_length=6,choices=GENDER, default='male')
+    badges                  = models.ManyToManyField('Badge',related_name='users',blank=True)
     is_active=models.BooleanField(default=True)
     is_staff=models.BooleanField(default=False)
     is_admin=models.BooleanField(default=False)
+
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
 
@@ -64,3 +75,11 @@ class User(AbstractBaseUser):
 	# Does this user have permission to view this app? (ALWAYS YES FOR SIMPLICITY)
     def has_module_perms(self, app_label):
         return True
+
+class Badge(models.Model):
+    """User achivments in images form"""
+    badge_name                 =models.CharField(max_length=20)            #text representation
+    badge_image                =models.ImageField(upload_to="badges/",verbose_name='Badge')     #image representation
+
+    def __str__(self):
+        return self.badge_name

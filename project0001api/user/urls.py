@@ -6,8 +6,8 @@ from rest_framework_jwt.views import obtain_jwt_token
 app_name="user"
 
 urlpatterns = [
-    path('user/', views.UserCreate.as_view()),
-    path('user/<int:pk>/', views.UserProfile.as_view()),
-    path('user/login', obtain_jwt_token, name="token"),
-    # path('logout',views.UserLogout.as_view()),
+    path('<int:pk>', views.UserViewSet.as_view({'get':'retrieve'})),
+    path('', views.UserViewSet.as_view({'get':'list','post':'create'})),
+    path('login', obtain_jwt_token, name="token"),
+    #path('/register', obtain_jwt_token, name="token"),
 ]
