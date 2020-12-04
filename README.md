@@ -15,7 +15,7 @@ SotialNetworkAPI on Django Rest Framework.
 - Django Rest Framework
 - PostgresSQL
 
-Copyright (c) 2020-present, DJWOMS - Omelchenko Michael
+Copyright (c) 2020-present, [The Boys](https://github.com/IT-The-Boys)
 
 
 
