@@ -1,8 +1,7 @@
 from rest_framework import serializers
 
 from project0001api.src.serializers import RecursiveSerializer, FilterCommentSerializer
-from .models import Post
-from comment.models import Comment
+from .models import Comment
 
 
 class CreateCommentSerializer(serializers.ModelSerializer):
@@ -11,6 +10,14 @@ class CreateCommentSerializer(serializers.ModelSerializer):
         model = Comment
         fields = ("post", "text", "parent")
 
+class CommentListSerializer(serializers.ModelSerializer):
+    """ comment list"""
+ #   user = serializers.ReadOnlyField(source='user.username')
+#
+ #   class Meta:
+  #      model = Comment
+   #     fields = ("id", "created_at", "user", "text")
+#
 
 class ListCommentSerializer(serializers.ModelSerializer):
     """ Comments list serializer """

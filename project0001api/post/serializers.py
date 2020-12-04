@@ -1,12 +1,6 @@
 from rest_framework import serializers
-
-from project0001api.src.serializers import RecursiveSerializer, FilterCommentSerializer
 from .models import Post
-from comment.models import Comment
 from comment.serializers import ListCommentSerializer
-
-
-
 
 class PostSerializer(serializers.ModelSerializer):
     """ Edit and display post """
