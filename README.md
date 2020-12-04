@@ -1,6 +1,6 @@
 <h2 align="center">LoveBurger by "The Boys"</h2>
 
-SotialNetwork on Django Rest Framework.
+SotialNetworkAPI on Django Rest Framework.
 
 **開発者**:
 - [Mikhaylov Dmitry](https://github.com//charopevez)
