@@ -43,6 +43,8 @@ urlpatterns = [
     path('api/v1/badge/', include('badge.urls')),
     path('api/v1/post/', include('post.urls')),
     path('api/v1/comment/', include('comment.urls')),
+    path('api/v1/emotion/', include('emotion.urls')),
+    path('api/v1/follower/', include('follower.urls')),
     path('api/v1/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
 ]
 

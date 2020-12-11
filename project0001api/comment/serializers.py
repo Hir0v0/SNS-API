@@ -10,15 +10,6 @@ class CreateCommentSerializer(serializers.ModelSerializer):
         model = Comment
         fields = ("post", "text", "parent")
 
-class CommentListSerializer(serializers.ModelSerializer):
-    """ comment list"""
- #   user = serializers.ReadOnlyField(source='user.username')
-#
- #   class Meta:
-  #      model = Comment
-   #     fields = ("id", "created_at", "user", "text")
-#
-
 class ListCommentSerializer(serializers.ModelSerializer):
     """ Comments list serializer """
     text = serializers.SerializerMethodField()

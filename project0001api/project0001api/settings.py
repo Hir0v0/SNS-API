@@ -44,7 +44,10 @@ INSTALLED_APPS = [
     'message',
     'badge',
     'post',
+    'feed',
     'comment',
+    'emotion',
+    'follower',
     'mptt',
     'drf_yasg2',
 ]
