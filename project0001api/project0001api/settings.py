@@ -28,7 +28,11 @@ SECRET_KEY = '*8a%+-w_vq*x9l7%rp)%y9+)5p=b7gtb0d*06g2ja!e!)k2cp('
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+<<<<<<< HEAD
 ALLOWED_HOSTS = ['127.0.0.1', '.cfe.sh']
+=======
+ALLOWED_HOSTS = ['*']
+>>>>>>> 1028fb4f4ec46e5db744bb2965e732dae2e5d301
 
 
 # Application definition
@@ -45,6 +49,13 @@ INSTALLED_APPS = [
     'user',
     'profile',
     'message',
+    'badge',
+    'post',
+    'feed',
+    'comment',
+    'emotion',
+    'follower',
+    'mptt',
     'drf_yasg2',
     'mptt',
 ]
@@ -119,7 +130,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tokyo'
 
 USE_I18N = True
 
@@ -132,6 +143,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = '/vol/web/static/'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT='/vol/web/media/'
 
 #Set models in use
 AUTH_USER_MODEL='user.User'
