@@ -9,5 +9,4 @@ urlpatterns = [
     path('user/', views.UserCreate.as_view()),
     path('user/<int:pk>/', views.UserProfile.as_view()),
     path('user/login', obtain_jwt_token, name="token"),
-    # path('logout',views.UserLogout.as_view()),
 ]

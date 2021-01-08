@@ -11,10 +11,13 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-
+#remember on same level as anage.py
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+           #Path(__file__).resolve().parent.parent
+print(BASE_DIR)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -25,7 +28,7 @@ SECRET_KEY = '*8a%+-w_vq*x9l7%rp)%y9+)5p=b7gtb0d*06g2ja!e!)k2cp('
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', '.cfe.sh']
 
 
 # Application definition
@@ -43,6 +46,7 @@ INSTALLED_APPS = [
     'profile',
     'message',
     'drf_yasg2',
+    'mptt',
 ]
 
 MIDDLEWARE = [
@@ -60,7 +64,7 @@ ROOT_URLCONF = 'project0001api.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, "templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

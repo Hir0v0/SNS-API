@@ -5,6 +5,7 @@ ENV PATH="/scripts:${PATH}"
 COPY ./requirements.txt /requirements.txt
 #install nessasary packs to temporary folder
 RUN apk add --upgrade libpq
+
 RUN apk add --no-cache jpeg-dev zlib-dev
 RUN apk add --update --no-cache --virtual .tmp gcc libc-dev linux-headers postgresql-dev
 #install requirements
